@@ -1,0 +1,8 @@
+[win]
+ec2-3-134-247-97.us-east-2.compute.amazonaws.com
+
+[win:vars]
+ansible_user=Administrator
+ansible_password=zGMUck7=Vfh;NCcBXtSZD5lQ=;cv?LGN
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
