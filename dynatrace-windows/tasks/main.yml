@@ -1,0 +1,39 @@
+---
+# tasks file for dynatrace-windows
+- name: Download Dynatrace on Target
+  ansible.windows.win_powershell:
+    script: |
+      powershell -command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri '{{ Uri }}' -Headers @{ 'Authorization' = '{{ ApiToken }}' } -OutFile '{{ OutFile }}'"
+
+- name: Check if its downloaded at {{ OutFile }}
+  win_stat:
+    path: "{{ OutFile }}"
+  register: file_exist
+
+- name: Report if dynatrace exists
+  debug:
+    msg: "The file exists"
+  when: file_exist.stat.exists
+
+- name: Report if dynatrace is missing
+  debug:
+    msg: "The file is not downloaded"
+  when: not file_exist.stat.exists
+
+- name: Check if Dynatrace is installed or not
+  ansible.windows.win_powershell:
+    script: |
+       powershell -command "Get-WmiObject -Class Win32_Product  | where Name -eq 'Dynatrace OneAgent' | select Name, Version"
+  register: getobject
+
+- name: debug
+  debug:
+   var: getobject.output
+
+
+- name: Install dynatrace
+  ansible.windows.win_package:
+    path: "{{ OutFile }}"
+    state: present
+  when: not "Dynatrace OneAgent 1.219.134" in getobject.output
+
