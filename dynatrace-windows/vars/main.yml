@@ -1,6 +1,6 @@
 ---
 # vars file for dynatrace-windows
-Uri: 'https://vny35673.live.dynatrace.com/api/v1/deployment/installer/agent/windows/default/latest?arch=x86&flavor=default'
+Uri: 'https://xxxxx.live.dynatrace.com/api/v1/deployment/installer/agent/windows/default/latest?arch=x86&flavor=default'
 ApiToken: 'Api-Token dt0c01.6B5FJKOH534U63MVJDRCGCOH.TK7LH6YJBYDWB5OYNEEIPMWHFRP5BKHNMPUFSEQVE5BC4ISG4GNXQZM4TUMBBZI7'
 OutFile: 'Dynatrace-OneAgent-Windows-1.219.134.exe' 
 path: 'C:\Users\Administrator\Dynatrace-OneAgent-Windows-1.219.134.exe'
